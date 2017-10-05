@@ -1,13 +1,31 @@
+buildscript {
+  repositories {
+    mavenCentral()
+  }
+  dependencies {
+    classpath 'org.junit.platform:junit-platform-gradle-plugin:1.0.1'
+  }
+}
+
 plugins {
   id "org.jetbrains.kotlin.jvm" version "1.1.51"
 }
 
+ext.junitVersion = '5.0.1'
+
 apply plugin: 'java'
+apply plugin: 'org.junit.platform.gradle.plugin'
 
 repositories {
-  jcenter()
+  mavenCentral()
 }
 
 dependencies {
   compile "org.jetbrains.kotlin:kotlin-stdlib-jre8"
+
+  testCompile "org.jetbrains.kotlin:kotlin-reflect"
+  // JUnit + HamKrest
+  testCompile("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
+  testRuntime("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
+  testCompile("com.natpryce:hamkrest:1.4.2.0")
 }
